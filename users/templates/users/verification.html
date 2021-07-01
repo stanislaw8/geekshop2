@@ -1,0 +1,21 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block content %}
+
+  {% if user %}
+
+    <div>
+      <h3 style="text-align: center;">Поздравляем!</h3>
+      <br>
+      <h4>Пользователь {{user.username}} подтвержден.</h4>
+    </div>
+  {% else %}
+    <h3>Верификация не пройдена.</h3>
+  {% endif %}
+  <br>
+  <button class="btn btn-round form-control" style="background-color: beige;">
+    <a href="{% url 'users:login' %}" class="">войти</a>
+  </button>
+
+{% endblock %}
