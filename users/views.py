@@ -39,12 +39,12 @@ def send_verify_mail(user):
     verify_link = reverse('users:verify', args=[user.email, user.activation_key])
 
     msg = EmailMessage()
-    msg['From'] = 'гикшоп магазин'
+    msg['From'] = 'гикшоп'
     msg['To'] = user.email
     msg['Subject'] = f'подтверждение {user.username}'
     msg.set_content(f'для подтверждения регистрации {user.username}  на сайте {settings.DOMAIN_NAME} перейди по ссылке:  {settings.DOMAIN_NAME}{verify_link}')
-    context=ssl.create_default_context()
     try:
+        context=ssl.create_default_context()
         with smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT) as smtp:
             smtp.starttls(context=context)
             smtp.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
